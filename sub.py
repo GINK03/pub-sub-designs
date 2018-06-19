@@ -1,14 +1,16 @@
 # Imports the Google Cloud client library
+import os
 from google.cloud import pubsub_v1
 
+GCP_PROJECT = os.environ['GCP_PROJECT']
 def sub():
   subscriber = pubsub_v1.SubscriberClient()
   topic_name = 'my-new-topic'
-  topic = f'projects/dena-ai-training-16-gcp/topics/{topic_name}'
+  topic = f'projects/{GCP_PROJECT}/topics/{topic_name}'
   print(topic)
   
   sub_name = 'my-new-subscription'
-  subscription_name = f'projects/dena-ai-training-16-gcp/subscriptions/{sub_name}'
+  subscription_name = f'projects/{GCP_PROJECT}/subscriptions/{sub_name}'
   
   try:
     subscriber.create_subscription(subscription_name, topic)
