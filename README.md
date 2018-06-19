@@ -64,3 +64,6 @@ future = subscriber.subscribe(subscription_name, callback)
 # ここでブロックが行われてコールバックで受け取るメッセージが展開される
 future.result()
 ```
+
+## 参考
+- [1][Pub/Sub](https://google-cloud-python.readthedocs.io/en/latest/pubsub/)
