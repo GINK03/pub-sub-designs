@@ -21,8 +21,8 @@ $ gcloud iam service-accounts keys create ${FILE_NAME}.json --iam-account ${NAME
 $ export GOOGLE_APPLICATION_CREDENTIALS="/home/user/Downloads/[FILE_NAME].json"
 ```
 
-## Subscriberを設定
-subscriptionを作成
+## Subscriptioを作成
+Subscriptionを作成
 ```python
 from google.cloud import pubsub_v1
 
@@ -31,10 +31,30 @@ GCP_PROJECT = os.environ['GCP_PROJECT']
 subscriber = pubsub_v1.SubscriberClient()
 topic_name = 'my-new-topic'
 topic = f'projects/{GCP_PROJECT}/topics/{topic_name}'
-  
+
+sub_name = 'my-new-subscription'
+subscription_name = f'projects/{GCP_PROJECT}/subscriptions/{sub_name}'
+
 subscriber.create_subscription(subscription_name, topic)
 ```
 
 ## Publisherを設定
+特に設定の必要なし
 
 ## Subscriberのメッセージの待受
+コールバックで待ち受けて実行なので、サーバのようなものが必要となる  
+```python
+subscriber = pubsub_v1.SubscriberClient()
+  
+sub_name = 'my-new-subscription'
+subscription_name = f'projects/{GCP_PROJECT}/subscriptions/{sub_name}'
+  
+def callback(message):
+  ''' 受け取ったメッセージに応じてなにかする '''
+  print(message.data)
+  message.ack()
+future = subscriber.subscribe(subscription_name, callback)
+  
+# ここでブロックが行われてコールバックで受け取るメッセージが展開される
+future.result()
+```
