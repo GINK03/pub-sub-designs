@@ -18,7 +18,7 @@ $ gcloud iam service-accounts keys create ${FILE_NAME}.json --iam-account ${NAME
 ```
 クレデンシャルをパスに追加
 ```console
-export GOOGLE_APPLICATION_CREDENTIALS="/home/user/Downloads/[FILE_NAME].json"
+$ export GOOGLE_APPLICATION_CREDENTIALS="/home/user/Downloads/[FILE_NAME].json"
 ```
 
 ## Subscriberを設定
