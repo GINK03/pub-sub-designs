@@ -22,6 +22,18 @@ $ export GOOGLE_APPLICATION_CREDENTIALS="/home/user/Downloads/[FILE_NAME].json"
 ```
 
 ## Subscriberを設定
+subscriptionを作成
+```python
+from google.cloud import pubsub_v1
+
+GCP_PROJECT = os.environ['GCP_PROJECT']
+
+subscriber = pubsub_v1.SubscriberClient()
+topic_name = 'my-new-topic'
+topic = f'projects/{GCP_PROJECT}/topics/{topic_name}'
+  
+subscriber.create_subscription(subscription_name, topic)
+```
 
 ## Publisherを設定
 
